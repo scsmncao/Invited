@@ -11,32 +11,19 @@ import Parse
 
 class HomeViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
     
-    var logInViewController: PFLogInViewController! = PFLogInViewController()
-    var signUpViewController: PFSignUpViewController! = PFSignUpViewController()
     @IBOutlet var getStartedButton: UIButton!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getStartedButton.backgroundColor = UIColor.whiteColor()
-
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if (PFUser.currentUser() == nil) {
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        }
-    }
-    
-    
-    @IBAction func logIn(sender: AnyObject) {
-        //self.presentViewController(self.logInViewController, animated: true, completion: nil)
-        self.performSegueWithIdentifier("signIn", sender: self)
-    }
-    
-    @IBAction func signOut(sender: AnyObject) {
-        PFUser.logOut()
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        
     }
 }
